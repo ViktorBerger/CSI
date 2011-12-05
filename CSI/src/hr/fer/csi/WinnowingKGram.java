@@ -9,6 +9,8 @@ public class WinnowingKGram {
 	private int numberOfKGrams;
 	private Vector<KGram> winnowingKGrams;
 	private Set<KGram> winnowingKGramsSet;
+	private Vector<KGram> KGrams0modP;
+	private Set<KGram> KGrams0modPSet;
 	
 	public WinnowingKGram(String sourceCode, int windowSize, int KGramLength){
 		numberOfKGrams = 0;
@@ -73,6 +75,22 @@ public class WinnowingKGram {
 		numberOfKGrams = KGrams.size();
 	}
 	
+	//Racuna 0 mod P K-Grame
+	//Radi s vektorom K-Grama i probire one čiji je hash djeljiv s P
+	public void calculateKGrams0ModP(int P){		
+		for(KGram kg: KGrams){
+			if(kg.getHash() % P == 0){
+				KGrams0modP.add(kg);
+			}
+		}	
+		KGrams0modPSet = new HashSet<KGram>(KGrams0modP);
+	}
+	
+	/*
+	 *Sada se postavlja pitanje kako oblikovati metodu calculateSimilarity,
+	 *također, ima li smisla da se klasa zove winnowingKGram?
+	 *
+	 */
 	
 	// Racuna slicnost, prima vektor winnowing kgrama
 	//Nacin racunanja je dobij preskej dva vektora pa njihovu uniju i podijeli presjek/unija
@@ -121,6 +139,13 @@ public class WinnowingKGram {
 	}
 	public Set<KGram> getWinnowingSet(){
 		return winnowingKGramsSet;
+	}
+	
+	public Vector<KGram> get0modPVector(){
+		return KGrams0modP;
+	}
+	public Set<KGram> get0modPSet(){
+		return KGrams0modPSet;
 	}
 
 }
