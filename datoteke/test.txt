@@ -1,0 +1,16 @@
+inlude <stdio.h>
+
+// ovo je komentar koji ce se trebati izbaciti
+
+int main() {
+	int i = 0;
+	int j = 23;
+	int c = i + j;
+	printf("Ovo je rezultat: %d", c);
+/* ovo ide van
+ali
+tek nakon
+ovoga */
+
+return 0;
+}
